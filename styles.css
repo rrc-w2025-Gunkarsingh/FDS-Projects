@@ -19,9 +19,14 @@
 
 .visit-us-cards {
   display: grid;
+  gap: 5rem;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: space-around;
 }
 
 .visit-us-card {
+  border: 1px solid red;
+  height: auto;
 }
 
 .visit-us-reservation {
