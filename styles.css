@@ -32,17 +32,20 @@
   grid-template-columns: repeat(4, 1fr);
   justify-content: space-around;
   padding: 3rem;
-}
 
-.card-icon,
-.card-title {
-  text-align: center;
-}
+  .card-icon,
+  .card-title {
+    text-align: center;
+  }
 
-.visit-us-card {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid red;
+  .visit-us-card {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border: 2px solid rgba(224, 218, 209, 0.459);
+    border-radius: 20px;
+    background-color: rgba(192, 141, 116, 0.408);
+  }
   padding: 3rem;
   height: auto;
 }
