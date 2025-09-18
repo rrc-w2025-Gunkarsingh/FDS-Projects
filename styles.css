@@ -38,6 +38,33 @@
     margin-top: 1.5rem;
 }
 
+.reservation-button{
+    display: inline-block;
+    padding:1rem 1rem;
+    font-size: 1rem;
+    background: rgba(233, 150, 122);
+    color: black;
+    border: none;
+    border-radius: 8px;
+}
+
+.reservation-button:hover{
+    background: rgba(233, 150, 122, 0.542);
+}
+
+.menu-button{
+    display: inline-block;
+    padding: 1rem 1rem;
+    font-size: 1rem;
+    color: black;
+    border: none;
+    background: rgb(218, 215, 215);
+    border-radius: 8px;
+}
+
+.menu-button:hover{
+    background: rgba(218, 215, 215, 0.542);
+}
 
 /* Header End */
 
