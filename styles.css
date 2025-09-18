@@ -22,11 +22,27 @@
   gap: 5rem;
   grid-template-columns: repeat(4, 1fr);
   justify-content: space-around;
+  padding: 3rem;
+}
+
+.card-icon,
+.card-title {
+  text-align: center;
 }
 
 .visit-us-card {
+  display: flex;
+  flex-direction: column;
   border: 1px solid red;
+  padding: 3rem;
   height: auto;
+}
+
+.visit-us-card-detail {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .visit-us-reservation {
