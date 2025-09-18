@@ -1,69 +1,75 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 /* Header Start */
-.header{
-    position: relative;
-    display: block;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    height: auto;
+.header {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: auto;
 }
 
 .header img {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.header-overlay{
-    position:absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color:white;
-    font-family: georgia;
+.header-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  font-family: georgia;
 }
 
-.header-overlay h1{
-    font-size: 56px;
-    font-weight: bold;
+.header-overlay h1 {
+  font-size: 56px;
+  font-weight: bold;
 }
 
 .header-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
 }
 
-.reservation-button{
-    display: inline-block;
-    padding:1rem 1rem;
-    font-size: 1rem;
-    background: rgba(233, 150, 122);
-    color: black;
-    border: none;
-    border-radius: 8px;
+.reservation-button {
+  display: inline-block;
+  padding: 1rem 1rem;
+  font-size: 1rem;
+  background: rgba(233, 150, 122);
+  color: black;
+  border: none;
+  border-radius: 8px;
 }
 
-.reservation-button:hover{
-    background: rgba(233, 150, 122, 0.542);
+.reservation-button:hover {
+  background: rgba(233, 150, 122, 0.542);
 }
 
-.menu-button{
-    display: inline-block;
-    padding: 1rem 1rem;
-    font-size: 1rem;
-    color: black;
-    border: none;
-    background: rgb(218, 215, 215);
-    border-radius: 8px;
+.menu-button {
+  display: inline-block;
+  padding: 1rem 1rem;
+  font-size: 1rem;
+  color: black;
+  border: none;
+  background: rgb(218, 215, 215);
+  border-radius: 8px;
 }
 
-.menu-button:hover{
-    background: rgba(218, 215, 215, 0.542);
+.menu-button:hover {
+  background: rgba(218, 215, 215, 0.542);
 }
 
 /* Header End */
@@ -87,14 +93,12 @@
   font-style: italic;
 }
 
-
 .dishes section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
   padding: 0 1rem 2rem 1rem;
 }
-
 
 .dishes figure {
   background-color: #f8ecd0;
@@ -110,20 +114,17 @@
   position: relative;
 }
 
-
 .dishes figure:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(207, 131, 72, 0.388);
   transform: scale(1.05);
 }
 
-
 .dishes img {
   width: 100%;
   height: 220px;
   object-fit: cover;
 }
-
 
 .dishes figcaption {
   font-weight: bold;
@@ -136,7 +137,6 @@
   color: #f08528;
   transform: scale(1.05);
 }
-
 
 @media (max-width: 600px) {
   .dishes img {
