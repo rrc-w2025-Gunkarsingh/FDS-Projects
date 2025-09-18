@@ -6,7 +6,7 @@
 
 ## Team Members:
 
-- Name 1
+- Andrei Anoling
 - Name 2
 - Name 3
 
@@ -14,7 +14,7 @@
 
 ### Name 1:
 
-- Worked on [specific elements] of the webpage.
+- Worked on the header
 
 ### Name 2:
 
