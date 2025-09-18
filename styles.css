@@ -54,37 +54,37 @@
   grid-template-columns: repeat(4, 1fr);
   justify-content: space-around;
   padding: 3rem;
-
-  .card-icon,
-  .card-title {
-    text-align: center;
-  }
-
-  .card-title {
-    font-size: 1.3rem;
-  }
-
-  .card-icon {
-    padding: 0;
-    margin: 0;
-  }
-
-  .card-icon svg {
-    width: 2rem;
-    height: auto;
-    stroke: #e9b887;
-  }
-
-  .visit-us-card {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    border: 2px solid rgba(224, 218, 209, 0.459);
-    border-radius: 20px;
-    background-color: rgba(192, 141, 116, 0.408);
-  }
-  padding: 3rem;
   height: auto;
+}
+
+.card-icon,
+.card-title {
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.3rem;
+}
+
+.card-icon {
+  padding: 0;
+  margin: 0;
+}
+
+.card-icon svg {
+  width: 2rem;
+  height: auto;
+  stroke: #e9b887;
+}
+
+.visit-us-card,
+.visit-us-reservation {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border: 2px solid rgba(224, 218, 209, 0.459);
+  border-radius: 20px;
+  background-color: rgba(192, 141, 116, 0.408);
 }
 
 .visit-us-card-detail {
@@ -97,12 +97,56 @@
 }
 
 .visit-us-reservation {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card-subtitle {
+  width: 50%;
+}
+
+.visit-us-reservation button {
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.8rem 2.2rem;
+  margin: 0 0.7rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 250ms, color 250ms, opacity 250ms;
+}
+
+.visit-us-reservation-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.visit-us-reservation button:first-child {
+  background: #d2a48b;
+  color: #3d2a1a;
+}
+
+.visit-us-reservation button:last-child {
+  background: #f5f3ee;
+  color: #3d2a1a;
+}
+
+.visit-us-reservation button:hover {
+  opacity: 0.85;
 }
 
 @media (width < 1024px) {
   .visit-us-cards {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+  }
+
+  .card-subtitle {
+    width: 90%;
   }
 }
 
