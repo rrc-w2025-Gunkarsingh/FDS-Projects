@@ -7,6 +7,25 @@
 /* Dishes End */
 
 /* Visit us Start */
+.visit-us {
+  display: flex;
+  flex-direction: column;
+}
+
+.visit-us h2,
+.visit-us p {
+  text-align: center;
+}
+
+.visit-us-cards {
+  display: grid;
+}
+
+.visit-us-card {
+}
+
+.visit-us-reservation {
+}
 
 /* Visit us End */
 
