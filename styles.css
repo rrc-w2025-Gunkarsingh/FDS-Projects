@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
 
+  font-family: sans-serif;
   color: white;
   background: #775540;
   background: linear-gradient(
@@ -19,6 +20,27 @@
     rgba(119, 85, 64, 1) 0%,
     rgba(192, 141, 116, 1) 100%
   );
+}
+
+.visit-us h2 {
+  font-size: 3rem;
+}
+
+.visit-us-subtitle {
+  position: relative;
+  width: 45%;
+  margin: 2rem auto;
+}
+
+.visit-us-subtitle::after {
+  position: absolute;
+  content: "";
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20%;
+
+  border-bottom: 0.3rem solid white;
 }
 
 .visit-us h2,
@@ -38,6 +60,21 @@
     text-align: center;
   }
 
+  .card-title {
+    font-size: 1.3rem;
+  }
+
+  .card-icon {
+    padding: 0;
+    margin: 0;
+  }
+
+  .card-icon svg {
+    width: 2rem;
+    height: auto;
+    stroke: #e9b887;
+  }
+
   .visit-us-card {
     display: flex;
     flex-direction: column;
@@ -55,6 +92,8 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  font-size: 0.9rem;
+  color: rgb(255, 255, 255);
 }
 
 .visit-us-reservation {
