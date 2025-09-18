@@ -7,9 +7,18 @@
 /* Dishes End */
 
 /* Visit us Start */
+
 .visit-us {
   display: flex;
   flex-direction: column;
+
+  color: white;
+  background: #775540;
+  background: linear-gradient(
+    90deg,
+    rgba(119, 85, 64, 1) 0%,
+    rgba(192, 141, 116, 1) 100%
+  );
 }
 
 .visit-us h2,
