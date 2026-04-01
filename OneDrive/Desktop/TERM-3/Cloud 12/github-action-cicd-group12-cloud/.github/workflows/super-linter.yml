@@ -1,0 +1,39 @@
+name: Super Linter
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  lint:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Run Super Linter
+        uses: super-linter/super-linter@v7
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Scope linting to the book-app-project folder
+          FILTER_REGEX_INCLUDE: .*book-app-project/.*
+          # Linters to enable
+          VALIDATE_PYTHON_RUFF: true
+          VALIDATE_PYTHON_MYPY: true
+          VALIDATE_JSON: true
+          VALIDATE_YAML: true
+          VALIDATE_MARKDOWN: true
+          # Python version for type checking
+          PYTHON_MYPY_CONFIG_FILE: .mypy.ini
+          PYTHON_RUFF_CONFIG_FILE: ruff.toml
