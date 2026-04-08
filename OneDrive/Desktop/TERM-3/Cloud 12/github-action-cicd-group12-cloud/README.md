@@ -1,5 +1,7 @@
 # CI/CD Demo Lab with Super Linter
 
+Final PR fix
+
 A hands-on lab demonstrating CI/CD pipelines using
 [GitHub Super Linter](https://github.com/super-linter/super-linter) and GitHub Actions.
 
