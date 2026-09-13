@@ -1,20 +1,21 @@
+import StudyOverview from "./components/study-overview/StudyOverview";
 import "./App.css";
-import MealCategories from "./components/meal-categories/MealCategories";
 
 function App() {
   return (
     <>
-      <header>
-        <h1>MealMate</h1>
+      <header className="app-header">
+        <h1>Study Planner</h1>
+        <p>Organize your studies. Stay on track. Reach your goals.</p>
       </header>
 
-      <main>
-        <MealCategories />
+      <main className="app-main">
+        <StudyOverview />
       </main>
 
-      <footer>
-        <p>Team MealMate</p>
-        <p>Gunkar | Sania | Bhoomika</p>
+      <footer className="app-footer">
+        <p>Study Planner Team</p>
+        <p>Team Memebers- Gunkar: Sania , bhumika</p>
       </footer>
     </>
   );
