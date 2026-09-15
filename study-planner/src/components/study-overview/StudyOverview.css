@@ -1,0 +1,109 @@
+/* =========================
+   Study Overview
+   ========================= */
+
+.study-overview {
+  width: 100%;
+}
+
+.study-overview h2 {
+  margin: 0;
+  color: #172b4d;
+  font-size: 1.8rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.study-overview > p {
+  max-width: 700px;
+  margin: 0.75rem 0 2rem;
+  color: #52637a;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* =========================
+   Study Cards
+   ========================= */
+
+.study-overview__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.study-card {
+  position: relative;
+  padding: 1.5rem;
+  background: #ffffff;
+  border: 1px solid #dce3ed;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(23, 43, 77, 0.06);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.study-card:hover {
+  transform: translateY(-5px);
+  border-color: #8b9cf6;
+  box-shadow: 0 10px 25px rgba(23, 43, 77, 0.12);
+}
+
+/* Small accent line at top of card */
+
+.study-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 4px;
+  border-radius: 0 0 6px 6px;
+  background: #4338ca;
+}
+
+/* =========================
+   Card Content
+   ========================= */
+
+.study-card h3 {
+  margin: 0.5rem 0 1.25rem;
+  color: #172b4d;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.study-card p {
+  margin: 0.7rem 0;
+  color: #52637a;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.study-card strong {
+  color: #293b58;
+  font-weight: 650;
+}
+
+/* =========================
+   Responsive Cards
+   ========================= */
+
+@media (max-width: 900px) {
+  .study-overview__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .study-overview__list {
+    grid-template-columns: 1fr;
+  }
+
+  .study-card {
+    padding: 1.25rem;
+  }
+}
