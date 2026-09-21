@@ -1,203 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Prairie Table</title>
-    <link rel="stylesheet" href="styles.css" />
+
+    <meta
+      name="description"
+      content="Study Planner - Organize your courses, assignments, and study goals."
+    />
+
+    <title>Study Planner</title>
   </head>
+
   <body>
     <header class="header">
-      <img
-        src="images/prairietable.png"
-        alt="Image of inside the Prarie table restaurant" />
-      <section class="header-overlay">
-        <h1>The Prairie Table</h1>
-        <h3>Authentic Cuisine in the Heart of Winnipeg</h3>
-        <p>Where local ingredients meet timeless recipies.</p>
-        <section class="header-buttons">
-          <button class="reservation-button">Make a Reservation</button>
-          <button class="menu-button">View Menu</button>
-        </section>
-      </section>
+      <h1>Study Planner</h1>
+      <p>Organize your studies. Stay on track. Reach your goals.</p>
     </header>
+
     <main>
-      <section class="dishes">
-        <h2>Menu</h2>
+      <section class="study-overview">
+        <h2>Study Overview</h2>
 
-        <section>
-          <h3>Appetizer</h3>
-          <figure>
-            <img
-              src="images/salad.jpeg"
-              alt="Salad platter"
-              width="400"
-              height="400" />
-            <figcaption>Salad Platter - $7.99</figcaption>
-          </figure>
-          <figure>
-            <img
-              src="images/salami.jpeg"
-              alt="Salami"
-              width="400"
-              height="400" />
-            <figcaption>Salami - $12.99</figcaption>
-          </figure>
-        </section>
-
-        <section>
-          <h3>Main Courses</h3>
-          <figure>
-            <img
-              src="images/steak.jpg"
-              alt="Filet steak"
-              width="400"
-              height="400" />
-            <figcaption>Filet Steak - $29.99</figcaption>
-          </figure>
-          <figure>
-            <img src="images/pasta.jpg" alt="Pasta" width="400" height="400" />
-            <figcaption>Pasta - $16.99</figcaption>
-          </figure>
-        </section>
-
-        <section>
-          <h3>Beverages</h3>
-          <figure>
-            <img
-              src="images/juice.jpg"
-              alt="Green juice"
-              width="400"
-              height="400" />
-            <figcaption>Green Juice - $9.99</figcaption>
-          </figure>
-          <figure>
-            <img
-              src="images/orange.jpg"
-              alt="Orange juice"
-              width="400"
-              height="400" />
-            <figcaption>Orange Juice - $9.99</figcaption>
-          </figure>
-        </section>
-      </section>
-      <section class="visit-us">
-        <h2>Visit Us Today</h2>
-        <p class="visit-us-subtitle">
-          Located in the heart of Winnipeg's Exchange District, we're ready to
-          welcome you with open arms and exceptional cuisine
+        <p>
+          Keep track of your courses, assignments, and study goals in one place.
         </p>
-        <div class="visit-us-cards">
-          <article class="visit-us-card">
-            <p class="card-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-clock2-icon lucide-clock-2">
-                <path d="M12 6v6l4-2" />
-                <circle cx="12" cy="12" r="10" />
-              </svg>
-            </p>
-            <p class="card-title">Location</p>
-            <ul class="visit-us-card-detail">
-              <li>123 Main Street</li>
-              <li>Exchange District</li>
-              <li>Winnipeg, MB R3C 1A1</li>
-            </ul>
-          </article>
-          <article class="visit-us-card">
-            <p class="card-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-phone-icon lucide-phone">
-                <path
-                  d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" />
-              </svg>
-            </p>
-            <p class="card-title">Phone</p>
-            <ul class="visit-us-card-detail">
-              <li>(204) 555-FOOD</li>
-              <li>(204) 555-3663</li>
-            </ul>
-          </article>
-          <article class="visit-us-card">
-            <p class="card-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-clock2-icon lucide-clock-2">
-                <path d="M12 6v6l4-2" />
-                <circle cx="12" cy="12" r="10" />
-              </svg>
-            </p>
-            <p class="card-title">Hours</p>
-            <ul class="visit-us-card-detail">
-              <li>Mon-Thu: 11am-10pm</li>
-              <li>Fri-Sat: 11am-11pm</li>
-              <li>Sun: 10am-9pm</li>
-            </ul>
-          </article>
-          <article class="visit-us-card">
-            <p class="card-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-mail-icon lucide-mail">
-                <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
-                <rect x="2" y="4" width="20" height="16" rx="2" />
-              </svg>
-            </p>
-            <p class="card-title">Email</p>
-            <ul class="visit-us-card-detail">
-              <li>info@prarietable.ca</li>
-              <li>events@prairietable.ca</li>
-            </ul>
-          </article>
-          <article class="visit-us-reservation">
-            <p class="card-title">Make a Reservation</p>
-            <p class="card-subtitle">
-              Reserve your table today and experience the warmth of prairie
-              hospitality. We recommend booking ahead, especially for weekend
-              dinners.
-            </p>
 
-            <div class="visit-us-reservation-buttons">
-              <button>Book Online</button>
-              <button>Call Us</button>
-            </div>
+        <div class="study-overview__list">
+
+          <!-- Courses -->
+          <article class="study-card">
+            <h3>Courses</h3>
+
+            <section>
+              <h4>Current Courses</h4>
+              <p>COMP-3019 - Application Design and Delivery</p>
+              <p>COMP-3018 - Back-End Development</p>
+              <p>COMP-3020 - Cloud Infrastructure</p>
+            </section>
+
+            <section>
+              <h4>Progress</h4>
+              <p>Application Design - 75%</p>
+              <p>Back-End Development - 65%</p>
+              <p>Cloud Infrastructure - 80%</p>
+            </section>
           </article>
+
+          <!-- Assignments -->
+          <article class="study-card">
+            <h3>Assignments</h3>
+
+            <section>
+              <h4>Upcoming</h4>
+              <p>Back-End API Project</p>
+              <p>Cloud Infrastructure Lab</p>
+              <p>Secure Coding Assignment</p>
+            </section>
+
+            <section>
+              <h4>Due Dates</h4>
+              <p>Back-End API - September 25</p>
+              <p>Cloud Lab - September 27</p>
+              <p>Security Assignment - September 30</p>
+            </section>
+          </article>
+
+          <!-- Study Goals -->
+          <article class="study-card">
+            <h3>Study Goals</h3>
+
+            <section>
+              <h4>Weekly Goals</h4>
+              <p>Complete 3 assignments</p>
+              <p>Study 15 hours</p>
+              <p>Review course notes</p>
+            </section>
+
+            <section>
+              <h4>Today's Plan</h4>
+              <p>Review lecture notes</p>
+              <p>Work on backend project</p>
+              <p>Complete practice questions</p>
+            </section>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Study Information -->
+      <section class="study-information">
+        <h2>Study Information</h2>
+
+        <div class="study-information__cards">
+
+          <article class="info-card">
+            <h3>📚 Courses</h3>
+            <p>3 Active Courses</p>
+            <p>Track your course progress and learning activities.</p>
+          </article>
+
+          <article class="info-card">
+            <h3>📝 Assignments</h3>
+            <p>3 Upcoming Assignments</p>
+            <p>Keep track of deadlines and upcoming coursework.</p>
+          </article>
+
+          <article class="info-card">
+            <h3>🎯 Goals</h3>
+            <p>15 Hours Weekly</p>
+            <p>Set realistic study goals and stay consistent.</p>
+          </article>
+
+          <article class="info-card">
+            <h3>⏰ Study Schedule</h3>
+            <p>Plan Your Time</p>
+            <p>Organize your daily study sessions and priorities.</p>
+          </article>
+
         </div>
       </section>
     </main>
-    <footer class="footer"></footer>
+
+    <footer class="footer">
+      <p>Study Planner Team</p>
+      <p>Team Members - Gunkar, Sania, Bhumika</p>
+    </footer>
   </body>
 </html>
