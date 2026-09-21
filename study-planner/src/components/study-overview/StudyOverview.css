@@ -23,7 +23,7 @@
 }
 
 /* =========================
-   Study Cards
+   Three Columns
    ========================= */
 
 .study-overview__list {
@@ -31,6 +31,10 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
 }
+
+/* =========================
+   Study Cards
+   ========================= */
 
 .study-card {
   position: relative;
@@ -51,7 +55,7 @@
   box-shadow: 0 10px 25px rgba(23, 43, 77, 0.12);
 }
 
-/* Small accent line at top of card */
+/* Top accent */
 
 .study-card::before {
   content: "";
@@ -64,32 +68,45 @@
   background: #4338ca;
 }
 
-/* =========================
-   Card Content
-   ========================= */
+/* Main column heading */
 
 .study-card h3 {
-  margin: 0.5rem 0 1.25rem;
+  margin: 0.5rem 0 1.5rem;
   color: #172b4d;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  line-height: 1.4;
 }
 
+/* Subheadings */
+
+.study-card h4 {
+  margin: 0 0 0.75rem;
+  color: #293b58;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* Sections inside each column */
+
+.study-card__section {
+  margin-bottom: 1.5rem;
+}
+
+.study-card__section:last-child {
+  margin-bottom: 0;
+}
+
+/* Information */
+
 .study-card p {
-  margin: 0.7rem 0;
+  margin: 0.65rem 0;
   color: #52637a;
   font-size: 0.95rem;
   line-height: 1.5;
 }
 
-.study-card strong {
-  color: #293b58;
-  font-weight: 650;
-}
-
 /* =========================
-   Responsive Cards
+   Responsive Design
    ========================= */
 
 @media (max-width: 900px) {
