@@ -10,7 +10,13 @@ function CoursesPage({ assignments }: CoursesPageProps) {
   return (
     <main>
       <h1>Courses</h1>
-      <p>Shared assignments: {assignments.length}</p>
+
+      <p>View your current courses and progress.</p>
+
+      <section>
+        <h2>Shared Assignment Information</h2>
+        <p>Total assignments: {assignments.length}</p>
+      </section>
     </main>
   );
 }

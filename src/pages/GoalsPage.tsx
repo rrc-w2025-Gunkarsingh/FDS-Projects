@@ -10,7 +10,13 @@ function GoalsPage({ assignments }: GoalsPageProps) {
   return (
     <main>
       <h1>Study Goals</h1>
-      <p>Shared assignments: {assignments.length}</p>
+
+      <p>Manage your study goals.</p>
+
+      <section>
+        <h2>Assignment Progress</h2>
+        <p>Total assignments: {assignments.length}</p>
+      </section>
     </main>
   );
 }

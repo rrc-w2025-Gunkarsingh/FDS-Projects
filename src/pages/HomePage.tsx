@@ -9,10 +9,14 @@ type HomePageProps = {
 
 function HomePage({ assignments }: HomePageProps) {
   return (
-    <>
+    <main>
       <StudyOverview />
-      <p>Total assignments: {assignments.length}</p>
-    </>
+
+      <section>
+        <h2>Assignment Summary</h2>
+        <p>Total assignments: {assignments.length}</p>
+      </section>
+    </main>
   );
 }
 

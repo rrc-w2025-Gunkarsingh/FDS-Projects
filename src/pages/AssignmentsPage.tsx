@@ -1,4 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
+import AssignmentForm from "../components/assignments/AssignmentForm";
+import AssignmentList from "../components/assignments/AssignmentList";
 import type { Assignment } from "../types/assignment";
 
 type AssignmentsPageProps = {
@@ -14,15 +16,16 @@ function AssignmentsPage({
     <main>
       <h1>Assignments</h1>
 
-      <p>Total assignments: {assignments.length}</p>
+      <p>
+        Manage your assignments and keep track of upcoming work.
+      </p>
 
-      <button
-        onClick={() => {
-          setAssignments((current) => current);
-        }}
-      >
-        Test Shared State
-      </button>
+      <AssignmentForm setAssignments={setAssignments} />
+
+      <AssignmentList
+        assignments={assignments}
+        setAssignments={setAssignments}
+      />
     </main>
   );
 }

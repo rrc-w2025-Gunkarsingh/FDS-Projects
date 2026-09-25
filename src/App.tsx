@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+
 import HomePage from "./pages/HomePage";
 import CoursesPage from "./pages/CoursesPage";
 import AssignmentsPage from "./pages/AssignmentsPage";
 import GoalsPage from "./pages/GoalsPage";
 import Layout from "./components/layout/Layout";
+
 import type { Assignment } from "./types/assignment";
 
 function App() {
