@@ -1,8 +1,16 @@
-function CoursesPage() {
+import type { Dispatch, SetStateAction } from "react";
+import type { Assignment } from "../types/assignment";
+
+type CoursesPageProps = {
+  assignments: Assignment[];
+  setAssignments: Dispatch<SetStateAction<Assignment[]>>;
+};
+
+function CoursesPage({ assignments }: CoursesPageProps) {
   return (
     <main>
       <h1>Courses</h1>
-      <p>View your current courses and progress.</p>
+      <p>Shared assignments: {assignments.length}</p>
     </main>
   );
 }
