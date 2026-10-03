@@ -9,6 +9,12 @@ import Layout from "./components/layout/Layout";
 
 import type { Assignment } from "./types/assignment";
 
+type Course = {
+  id: number;
+  code: string;
+  name: string;
+};
+
 function App() {
   const [assignments, setAssignments] = useState<Assignment[]>([
     {
@@ -24,6 +30,29 @@ function App() {
       course: "COMP-3019",
       dueDate: "2026-10-02",
       completed: false,
+    },
+  ]);
+
+  const [courses, setCourses] = useState<Course[]>([
+    {
+      id: 1,
+      code: "COMP-3019",
+      name: "Application Design and Delivery",
+    },
+    {
+      id: 2,
+      code: "COMP-3018",
+      name: "Back-End Development",
+    },
+    {
+      id: 3,
+      code: "COMP-3020",
+      name: "Cloud Infrastructure and Development",
+    },
+    {
+      id: 4,
+      code: "COMP-3021",
+      name: "Secure Coding and Testing",
     },
   ]);
 
@@ -44,8 +73,8 @@ function App() {
           path="/courses"
           element={
             <CoursesPage
-              assignments={assignments}
-              setAssignments={setAssignments}
+              courses={courses}
+              setCourses={setCourses}
             />
           }
         />
