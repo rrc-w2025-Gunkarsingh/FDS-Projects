@@ -1,33 +1,59 @@
-type GoalFormProps = {
-  newGoal: string;
-  setNewGoal: (goal: string) => void;
-  addGoal: () => void;
-};
+import { useState } from "react";
 
-function GoalForm(props: GoalFormProps) {
-  function handleSubmit() {
-    if (props.newGoal.trim() === "") {
+interface GoalFormProps {
+  onAddGoal: (category: string, goal: string) => void;
+}
+
+function GoalForm({ onAddGoal }: GoalFormProps) {
+  const [category, setCategory] = useState("Weekly Goal");
+  const [goal, setGoal] = useState("");
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (goal.trim() === "") {
       return;
     }
 
-    props.addGoal();
-  }
+    onAddGoal(category, goal);
+
+    // Clear the form after adding
+    setGoal("");
+    setCategory("Weekly Goal");
+  };
 
   return (
-    <div>
-      <h4>Add a New Goal</h4>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="category">Goal Category:</label>
 
-      <input
-        type="text"
-        value={props.newGoal}
-        placeholder="Enter a study goal"
-        onChange={(event) => props.setNewGoal(event.target.value)}
-      />
+        <select
+          id="category"
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
+        >
+          <option value="Weekly Goal">Weekly Goal</option>
+          <option value="Study Time">Study Time</option>
+          <option value="Review">Review</option>
+          <option value="Personal Goal">Personal Goal</option>
+        </select>
+      </div>
 
-      <button type="button" onClick={handleSubmit}>
-        Add Goal
-      </button>
-    </div>
+      <div>
+        <label htmlFor="goal">Goal:</label>
+
+        <input
+          id="goal"
+          type="text"
+          value={goal}
+          onChange={(event) => setGoal(event.target.value)}
+          placeholder="Enter your study goal"
+          required
+        />
+      </div>
+
+      <button type="submit">Add Goal</button>
+    </form>
   );
 }
 

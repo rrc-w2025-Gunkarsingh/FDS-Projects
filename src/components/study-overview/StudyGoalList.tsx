@@ -2,11 +2,11 @@
 import GoalForm from "./GoalForm";
 import GoalItem from "./GoalItem";
 
-type StudyGoal = {
+interface StudyGoal {
   id: number;
   category: string;
   goal: string;
-};
+}
 
 function StudyGoalList() {
   const [goals, setGoals] = useState<StudyGoal[]>([
@@ -27,51 +27,37 @@ function StudyGoalList() {
     },
   ]);
 
-  const [newGoal, setNewGoal] = useState("");
-
-  function addGoal() {
-    if (newGoal.trim() === "") {
-      return;
-    }
-
-    const goal: StudyGoal = {
+  const addGoal = (category: string, goal: string) => {
+    const newGoal: StudyGoal = {
       id: Date.now(),
-      category: "Personal Goal",
-      goal: newGoal,
+      category,
+      goal,
     };
 
-    setGoals([...goals, goal]);
-    setNewGoal("");
-  }
+    setGoals([...goals, newGoal]);
+  };
 
-  function removeGoal(id: number) {
+  const removeGoal = (id: number) => {
     setGoals(goals.filter((goal) => goal.id !== id));
-  }
+  };
 
   return (
-    <article className="study-card">
-      <h3>Study Goals</h3>
+    <section>
+      <h2>Study Goals</h2>
 
-      <div className="study-card__section">
-        <h4>Weekly Goals</h4>
+      <GoalForm onAddGoal={addGoal} />
 
+      <div>
         {goals.map((goal) => (
           <GoalItem
             key={goal.id}
-            id={goal.id}
             category={goal.category}
             goal={goal.goal}
-            removeGoal={removeGoal}
+            onRemove={() => removeGoal(goal.id)}
           />
         ))}
-
-        <GoalForm
-          newGoal={newGoal}
-          setNewGoal={setNewGoal}
-          addGoal={addGoal}
-        />
       </div>
-    </article>
+    </section>
   );
 }
 

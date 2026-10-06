@@ -1,28 +1,16 @@
-type GoalItemProps = {
-  id: number;
+interface GoalItemProps {
   category: string;
   goal: string;
-  removeGoal: (id: number) => void;
-};
+  onRemove: () => void;
+}
 
-function GoalItem({
-  id,
-  category,
-  goal,
-  removeGoal,
-}: GoalItemProps) {
+function GoalItem({ category, goal, onRemove }: GoalItemProps) {
   return (
     <div>
-      <p>
-        <strong>{category}:</strong> {goal}
-      </p>
+      <h3>{category}</h3>
+      <p>{goal}</p>
 
-      <button
-        type="button"
-        onClick={() => removeGoal(id)}
-      >
-        Remove
-      </button>
+      <button onClick={onRemove}>Remove</button>
     </div>
   );
 }
