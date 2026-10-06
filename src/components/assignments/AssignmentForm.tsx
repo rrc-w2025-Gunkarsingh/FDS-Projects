@@ -62,13 +62,17 @@ function AssignmentForm({
             Course
           </label>
 
-          <input
-            id="assignment-course"
-            type="text"
-            value={course}
-            onChange={(event) => setCourse(event.target.value)}
-            placeholder="e.g. COMP-3018"
-          />
+          <select
+  id="assignment-course"
+  value={course}
+  onChange={(event) => setCourse(event.target.value)}
+>
+  <option value="">Select a course</option>
+  <option value="COMP-3018">COMP-3018</option>
+  <option value="COMP-3019">COMP-3019</option>
+  <option value="COMP-3020">COMP-3020</option>
+  <option value="COMP-3021">COMP-3021</option>
+</select>
         </div>
 
         <div>

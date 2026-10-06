@@ -1,92 +1,184 @@
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* Main app */
+* {
+  box-sizing: border-box;
 }
 
-/* =========================
-   Header
-   ========================= */
-
-.app-header {
-  padding: 3.5rem 1.5rem;
-  text-align: center;
-  background: linear-gradient(135deg, #1e3a5f 0%, #4338ca 100%);
-  color: #ffffff;
-  box-shadow: 0 4px 15px rgba(30, 58, 95, 0.2);
-}
-
-.app-header h1 {
+body {
   margin: 0;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f7fb;
+  color: #172b4d;
 }
 
-.app-header p {
-  max-width: 650px;
-  margin: 1rem auto 0;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  opacity: 0.95;
+/* Navigation */
+nav {
+  background: #172b4d;
+  padding: 18px 40px;
+  display: flex;
+  gap: 28px;
 }
 
-/* =========================
-   Main Content
-   ========================= */
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+}
 
-.app-main {
-  width: min(1100px, 90%);
+nav a:hover {
+  color: #65a8ff;
+}
+
+/* Main page */
+main {
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 3rem 0;
-  flex: 1;
+  padding: 45px 30px;
 }
 
-/* =========================
-   Footer
-   ========================= */
-
-.app-footer {
-  padding: 2rem 1rem;
-  text-align: center;
-  background-color: #172b4d;
-  color: #ffffff;
+main h1 {
+  font-size: 38px;
+  margin: 0 0 10px;
+  color: #172b4d;
 }
 
-.app-footer p {
-  margin: 0.4rem;
-  line-height: 1.5;
+main > p {
+  color: #64748b;
+  font-size: 17px;
+  margin-bottom: 35px;
 }
 
-.app-footer p:first-child {
-  font-size: 1.05rem;
-  font-weight: 700;
+/* Headings */
+h2 {
+  color: #172b4d;
+  font-size: 25px;
+  margin-top: 35px;
+  margin-bottom: 18px;
 }
 
-.app-footer p:last-child {
-  font-size: 0.9rem;
-  opacity: 0.85;
+/* Assignment form */
+form {
+  background: white;
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 40px;
 }
 
-/* =========================
-   Responsive Design
-   ========================= */
+form div {
+  margin-bottom: 18px;
+}
 
+form label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 7px;
+  color: #334155;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  font-size: 15px;
+  background: white;
+}
+
+form input:focus,
+form select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Main buttons */
+form button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #1d4ed8;
+}
+
+/* Assignment cards */
+article {
+  background: white;
+  padding: 22px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  border-left: 5px solid #2563eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+article h3 {
+  margin: 0 0 14px;
+  font-size: 21px;
+  color: #172b4d;
+}
+
+article p {
+  margin: 8px 0;
+  color: #64748b;
+}
+
+/* Completed checkbox */
+article label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+article input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+}
+
+/* Remove button */
+article button {
+  margin-left: 15px;
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+article button:hover {
+  background: #fecaca;
+}
+
+/* Mobile */
 @media (max-width: 600px) {
-  .app-header {
-    padding: 2.5rem 1rem;
+  nav {
+    padding: 15px 20px;
+    gap: 15px;
+    flex-wrap: wrap;
   }
 
-  .app-header h1 {
-    font-size: 2rem;
+  main {
+    padding: 30px 18px;
   }
 
-  .app-header p {
-    font-size: 1rem;
+  main h1 {
+    font-size: 30px;
   }
 
-  .app-main {
-    width: 92%;
-    padding: 2rem 0;
+  form {
+    padding: 20px;
   }
 }
