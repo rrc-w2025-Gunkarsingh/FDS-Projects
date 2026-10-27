@@ -1,3 +1,4 @@
+import CourseSummary from "../components/CourseSummary";
 import type { Dispatch, SetStateAction } from "react";
 import StudyOverview from "../components/study-overview/StudyOverview";
 import type { Assignment } from "../types/assignment";
@@ -10,6 +11,7 @@ type HomePageProps = {
 function HomePage({ assignments }: HomePageProps) {
   return (
     <main>
+      <h1>My Study Dashboard</h1>
       <StudyOverview />
 
       <section>

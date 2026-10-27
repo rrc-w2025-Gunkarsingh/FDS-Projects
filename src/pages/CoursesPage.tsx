@@ -1,60 +1,28 @@
 import { useState } from "react";
-import type {
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-} from "react";
+import type { FormEvent } from "react";
+import { useCourses } from "../hooks/useCourses";
 
-type Course = {
-  id: number;
-  code: string;
-  name: string;
-};
+function CoursesPage() {
+  const { courses, error, addCourse, removeCourse } = useCourses();
 
-type CoursesPageProps = {
-  courses: Course[];
-  setCourses: Dispatch<SetStateAction<Course[]>>;
-};
-
-function CoursesPage({
-  courses,
-  setCourses,
-}: CoursesPageProps) {
   const [courseCode, setCourseCode] = useState("");
   const [courseName, setCourseName] = useState("");
 
+  // This page uses useCourses to manage the course list.
+  // The hook calls the service, and the service uses the repository.
+  // This keeps course rules and data separate from the page.
   const handleAddCourse = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!courseCode.trim() || !courseName.trim()) {
-      return;
-    }
+    addCourse(courseCode, courseName);
 
-    const newCourse: Course = {
-      id: Date.now(),
-      code: courseCode.trim(),
-      name: courseName.trim(),
-    };
-
-    setCourses((currentCourses) => [
-      ...currentCourses,
-      newCourse,
-    ]);
-
-    setCourseCode("");
-    setCourseName("");
-  };
-
-  const handleRemoveCourse = (id: number) => {
-    setCourses((currentCourses) =>
-      currentCourses.filter((course) => course.id !== id)
-    );
+    // Keep the entered values if the service reports an error.
+    // We will improve this behaviour after connecting everything.
   };
 
   return (
     <main>
       <h1>Courses</h1>
-
       <p>Add and manage your current courses.</p>
 
       <section>
@@ -63,34 +31,30 @@ function CoursesPage({
         <form onSubmit={handleAddCourse}>
           <div>
             <label htmlFor="course-code">Course Code</label>
-
             <input
               id="course-code"
               type="text"
               value={courseCode}
-              onChange={(event) =>
-                setCourseCode(event.target.value)
-              }
+              onChange={(event) => setCourseCode(event.target.value)}
               placeholder="e.g. COMP-3019"
             />
           </div>
 
           <div>
             <label htmlFor="course-name">Course Name</label>
-
             <input
               id="course-name"
               type="text"
               value={courseName}
-              onChange={(event) =>
-                setCourseName(event.target.value)
-              }
+              onChange={(event) => setCourseName(event.target.value)}
               placeholder="e.g. Application Design and Delivery"
             />
           </div>
 
           <button type="submit">Add Course</button>
         </form>
+
+        {error && <p role="alert">{error}</p>}
       </section>
 
       <section>
@@ -107,7 +71,7 @@ function CoursesPage({
 
                 <button
                   type="button"
-                  onClick={() => handleRemoveCourse(course.id)}
+                  onClick={() => removeCourse(course.id)}
                 >
                   Remove
                 </button>
