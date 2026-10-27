@@ -10,11 +10,6 @@ import Layout from "./components/layout/Layout";
 
 import type { Assignment } from "./types/assignment";
 
-type Course = {
-  id: number;
-  code: string;
-  name: string;
-};
 
 function App() {
   const [assignments, setAssignments] = useState<Assignment[]>([
@@ -34,28 +29,7 @@ function App() {
     },
   ]);
 
-  const [courses, setCourses] = useState<Course[]>([
-    {
-      id: 1,
-      code: "COMP-3019",
-      name: "Application Design and Delivery",
-    },
-    {
-      id: 2,
-      code: "COMP-3018",
-      name: "Back-End Development",
-    },
-    {
-      id: 3,
-      code: "COMP-3020",
-      name: "Cloud Infrastructure and Development",
-    },
-    {
-      id: 4,
-      code: "COMP-3021",
-      name: "Secure Coding and Testing",
-    },
-  ]);
+  
 
   return (
     <Routes>
@@ -70,15 +44,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/courses"
-          element={
-            <CoursesPage
-              courses={courses}
-              setCourses={setCourses}
-            />
-          }
-        />
+          <Route path="/courses" element={<CoursesPage />} />
 
         <Route
           path="/assignments"
