@@ -1,48 +1,49 @@
 import { useState } from "react";
-import type { FormEvent, Dispatch, SetStateAction } from "react";
-import type { Assignment } from "../../types/assignment";
+import type { FormEvent } from "react";
 
-type AssignmentFormProps = {
-  setAssignments: Dispatch<SetStateAction<Assignment[]>>;
-};
+import { useAssignments } from "../../hooks/useAssignments";
 
-function AssignmentForm({
-  setAssignments,
-}: AssignmentFormProps) {
+/*
+  AssignmentForm uses the custom hook to add assignments.
+
+  The service validates assignment information.
+  The repository stores the assignment.
+
+  This keeps business and data logic outside the component.
+*/
+
+export default function AssignmentForm() {
+  const { addAssignment } = useAssignments();
+
   const [title, setTitle] = useState("");
   const [course, setCourse] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!title.trim() || !course.trim() || !dueDate) {
-      return;
+    try {
+      addAssignment(title, course, dueDate);
+
+      setTitle("");
+      setCourse("");
+      setDueDate("");
+      setError("");
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Unable to add assignment"
+      );
     }
-
-    const newAssignment: Assignment = {
-      id: Date.now(),
-      title: title.trim(),
-      course: course.trim(),
-      dueDate,
-      completed: false,
-    };
-
-    setAssignments((currentAssignments) => [
-      ...currentAssignments,
-      newAssignment,
-    ]);
-
-    setTitle("");
-    setCourse("");
-    setDueDate("");
-  };
+  }
 
   return (
     <section>
       <h2>Add Assignment</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <div>
           <label htmlFor="assignment-title">
             Assignment Name
@@ -52,7 +53,9 @@ function AssignmentForm({
             id="assignment-title"
             type="text"
             value={title}
-            onChange={(event) => setTitle(event.target.value)}
+            onChange={(event) =>
+              setTitle(event.target.value)
+            }
             placeholder="Enter assignment name"
           />
         </div>
@@ -63,16 +66,18 @@ function AssignmentForm({
           </label>
 
           <select
-  id="assignment-course"
-  value={course}
-  onChange={(event) => setCourse(event.target.value)}
->
-  <option value="">Select a course</option>
-  <option value="COMP-3018">COMP-3018</option>
-  <option value="COMP-3019">COMP-3019</option>
-  <option value="COMP-3020">COMP-3020</option>
-  <option value="COMP-3021">COMP-3021</option>
-</select>
+            id="assignment-course"
+            value={course}
+            onChange={(event) =>
+              setCourse(event.target.value)
+            }
+          >
+            <option value="">Select a course</option>
+            <option value="COMP-3018">COMP-3018</option>
+            <option value="COMP-3019">COMP-3019</option>
+            <option value="COMP-3020">COMP-3020</option>
+            <option value="COMP-3021">COMP-3021</option>
+          </select>
         </div>
 
         <div>
@@ -84,9 +89,17 @@ function AssignmentForm({
             id="assignment-date"
             type="date"
             value={dueDate}
-            onChange={(event) => setDueDate(event.target.value)}
+            onChange={(event) =>
+              setDueDate(event.target.value)
+            }
           />
         </div>
+
+        {error && (
+          <p role="alert" style={{ color: "red" }}>
+            {error}
+          </p>
+        )}
 
         <button type="submit">
           Add Assignment
@@ -95,5 +108,3 @@ function AssignmentForm({
     </section>
   );
 }
-
-export default AssignmentForm;

@@ -6,7 +6,16 @@ type AssignmentCardProps = {
   onToggleComplete: (id: number) => void;
 };
 
-function AssignmentCard({
+/*
+  AssignmentCard displays one assignment.
+
+  It receives presentation data and event handlers.
+
+  Business rules are handled by the service,
+  not inside this component.
+*/
+
+export default function AssignmentCard({
   assignment,
   onRemove,
   onToggleComplete,
@@ -17,16 +26,26 @@ function AssignmentCard({
 
       <p>Course: {assignment.course}</p>
 
-      <p>Due: {assignment.dueDate}</p>
+      <p>Due Date: {assignment.dueDate}</p>
 
       <label>
         <input
           type="checkbox"
           checked={assignment.completed}
-          onChange={() => onToggleComplete(assignment.id)}
+          onChange={() =>
+            onToggleComplete(assignment.id)
+          }
         />
+
         Completed
       </label>
+
+      <p>
+        Status:{" "}
+        {assignment.completed
+          ? "Completed"
+          : "Not Completed"}
+      </p>
 
       <button
         type="button"
@@ -37,5 +56,3 @@ function AssignmentCard({
     </article>
   );
 }
-
-export default AssignmentCard;
