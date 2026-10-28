@@ -2,18 +2,22 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 
 import { useAssignments } from "../../hooks/useAssignments";
+import { useCourses } from "../../hooks/useCourses";
 
 /*
-  AssignmentForm uses the custom hook to add assignments.
+  This form adds assignments using useAssignments.
 
-  The service validates assignment information.
-  The repository stores the assignment.
+  It gets the course list from useCourses instead
+  of using hardcoded course names.
 
-  This keeps business and data logic outside the component.
+  The assignment service handles validation.
 */
 
 export default function AssignmentForm() {
   const { addAssignment } = useAssignments();
+
+  // Get courses from Sania's feature
+  const { courses } = useCourses();
 
   const [title, setTitle] = useState("");
   const [course, setCourse] = useState("");
@@ -30,10 +34,10 @@ export default function AssignmentForm() {
       setCourse("");
       setDueDate("");
       setError("");
-    } catch (error) {
+    } catch (err) {
       setError(
-        error instanceof Error
-          ? error.message
+        err instanceof Error
+          ? err.message
           : "Unable to add assignment"
       );
     }
@@ -53,9 +57,7 @@ export default function AssignmentForm() {
             id="assignment-title"
             type="text"
             value={title}
-            onChange={(event) =>
-              setTitle(event.target.value)
-            }
+            onChange={(event) => setTitle(event.target.value)}
             placeholder="Enter assignment name"
           />
         </div>
@@ -68,15 +70,15 @@ export default function AssignmentForm() {
           <select
             id="assignment-course"
             value={course}
-            onChange={(event) =>
-              setCourse(event.target.value)
-            }
+            onChange={(event) => setCourse(event.target.value)}
           >
             <option value="">Select a course</option>
-            <option value="COMP-3018">COMP-3018</option>
-            <option value="COMP-3019">COMP-3019</option>
-            <option value="COMP-3020">COMP-3020</option>
-            <option value="COMP-3021">COMP-3021</option>
+
+            {courses.map((item) => (
+              <option key={item.id} value={item.code}>
+                {item.code} - {item.name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -89,9 +91,7 @@ export default function AssignmentForm() {
             id="assignment-date"
             type="date"
             value={dueDate}
-            onChange={(event) =>
-              setDueDate(event.target.value)
-            }
+            onChange={(event) => setDueDate(event.target.value)}
           />
         </div>
 
