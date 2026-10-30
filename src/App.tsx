@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
@@ -17,6 +18,7 @@ type Course = {
 };
 
 function App() {
+  // Keep assignment state for the existing HomePage.
   const [assignments, setAssignments] = useState<Assignment[]>([
     {
       id: 1,
@@ -34,6 +36,7 @@ function App() {
     },
   ]);
 
+  // Keep existing course state.
   const [courses, setCourses] = useState<Course[]>([
     {
       id: 1,
@@ -57,9 +60,11 @@ function App() {
     },
   ]);
 
+  
   return (
     <Routes>
       <Route element={<Layout />}>
+        {/* Home page */}
         <Route
           path="/"
           element={
@@ -70,6 +75,7 @@ function App() {
           }
         />
 
+        {/* Courses page */}
         <Route
           path="/courses"
           element={
@@ -80,6 +86,7 @@ function App() {
           }
         />
 
+        {/* Assignments page */}
         <Route
           path="/assignments"
           element={
@@ -90,18 +97,13 @@ function App() {
           }
         />
 
+        {/* Study Goals page */}
         <Route
           path="/goals"
-          element={
-            <GoalsPage
-              assignments={assignments}
-              setAssignments={setAssignments}
-            />
-          }
+          element={<GoalsPage />}
         />
       </Route>
     </Routes>
   );
 }
-
 export default App;
