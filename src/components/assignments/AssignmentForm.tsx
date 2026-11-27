@@ -1,48 +1,53 @@
 import { useState } from "react";
-import type { FormEvent, Dispatch, SetStateAction } from "react";
-import type { Assignment } from "../../types/assignment";
+import type { FormEvent } from "react";
 
-type AssignmentFormProps = {
-  setAssignments: Dispatch<SetStateAction<Assignment[]>>;
-};
+import { useAssignments } from "../../hooks/useAssignments";
+import { useCourses } from "../../hooks/useCourses";
 
-function AssignmentForm({
-  setAssignments,
-}: AssignmentFormProps) {
+/*
+  This form adds assignments using useAssignments.
+
+  It gets the course list from useCourses instead
+  of using hardcoded course names.
+
+  The assignment service handles validation.
+*/
+
+export default function AssignmentForm() {
+  const { addAssignment } = useAssignments();
+
+  // Get courses from Sania's feature
+  const { courses } = useCourses();
+
   const [title, setTitle] = useState("");
   const [course, setCourse] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!title.trim() || !course.trim() || !dueDate) {
-      return;
+    try {
+      addAssignment(title, course, dueDate);
+
+      setTitle("");
+      setCourse("");
+      setDueDate("");
+      setError("");
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to add assignment"
+      );
     }
-
-    const newAssignment: Assignment = {
-      id: Date.now(),
-      title: title.trim(),
-      course: course.trim(),
-      dueDate,
-      completed: false,
-    };
-
-    setAssignments((currentAssignments) => [
-      ...currentAssignments,
-      newAssignment,
-    ]);
-
-    setTitle("");
-    setCourse("");
-    setDueDate("");
-  };
+  }
 
   return (
     <section>
       <h2>Add Assignment</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <div>
           <label htmlFor="assignment-title">
             Assignment Name
@@ -63,16 +68,18 @@ function AssignmentForm({
           </label>
 
           <select
-  id="assignment-course"
-  value={course}
-  onChange={(event) => setCourse(event.target.value)}
->
-  <option value="">Select a course</option>
-  <option value="COMP-3018">COMP-3018</option>
-  <option value="COMP-3019">COMP-3019</option>
-  <option value="COMP-3020">COMP-3020</option>
-  <option value="COMP-3021">COMP-3021</option>
-</select>
+            id="assignment-course"
+            value={course}
+            onChange={(event) => setCourse(event.target.value)}
+          >
+            <option value="">Select a course</option>
+
+            {courses.map((item) => (
+              <option key={item.id} value={item.code}>
+                {item.code} - {item.name}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div>
@@ -88,6 +95,12 @@ function AssignmentForm({
           />
         </div>
 
+        {error && (
+          <p role="alert" style={{ color: "red" }}>
+            {error}
+          </p>
+        )}
+
         <button type="submit">
           Add Assignment
         </button>
@@ -95,5 +108,3 @@ function AssignmentForm({
     </section>
   );
 }
-
-export default AssignmentForm;

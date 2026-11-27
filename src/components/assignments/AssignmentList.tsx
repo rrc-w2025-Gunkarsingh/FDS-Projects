@@ -1,53 +1,40 @@
-import type { Dispatch, SetStateAction } from "react";
-import type { Assignment } from "../../types/assignment";
 import AssignmentCard from "./AssignmentCard";
 
-type AssignmentListProps = {
-  assignments: Assignment[];
-  setAssignments: Dispatch<SetStateAction<Assignment[]>>;
-};
+import { useAssignments } from "../../hooks/useAssignments";
 
-function AssignmentList({
-  assignments,
-  setAssignments,
-}: AssignmentListProps) {
-  const handleRemove = (id: number) => {
-    setAssignments((currentAssignments) =>
-      currentAssignments.filter((assignment) => assignment.id !== id)
-    );
-  };
+/*
+  AssignmentList uses the custom hook.
 
-  const handleToggleComplete = (id: number) => {
-    setAssignments((currentAssignments) =>
-      currentAssignments.map((assignment) =>
-        assignment.id === id
-          ? {
-              ...assignment,
-              completed: !assignment.completed,
-            }
-          : assignment
-      )
-    );
-  };
+  It displays assignments and allows users
+  to remove or complete assignments.
+
+  The hook connects to the service,
+  which communicates with the repository.
+*/
+
+export default function AssignmentList() {
+  const {
+    assignments,
+    removeAssignment,
+    toggleComplete,
+  } = useAssignments();
 
   return (
     <section>
       <h2>My Assignments</h2>
 
       {assignments.length === 0 ? (
-        <p>No assignments yet.</p>
+        <p>No assignments available.</p>
       ) : (
         assignments.map((assignment) => (
           <AssignmentCard
             key={assignment.id}
             assignment={assignment}
-            onRemove={handleRemove}
-            onToggleComplete={handleToggleComplete}
+            onRemove={removeAssignment}
+            onToggleComplete={toggleComplete}
           />
         ))
       )}
     </section>
   );
 }
-
-export default AssignmentList;

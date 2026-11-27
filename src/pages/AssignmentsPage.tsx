@@ -1,17 +1,16 @@
-import type { Dispatch, SetStateAction } from "react";
 import AssignmentForm from "../components/assignments/AssignmentForm";
+
 import AssignmentList from "../components/assignments/AssignmentList";
-import type { Assignment } from "../types/assignment";
 
-type AssignmentsPageProps = {
-  assignments: Assignment[];
-  setAssignments: Dispatch<SetStateAction<Assignment[]>>;
-};
+/*
+  AssignmentsPage displays the assignment form and list.
 
-function AssignmentsPage({
-  assignments,
-  setAssignments,
-}: AssignmentsPageProps) {
+  Both components use the custom assignment hook.
+
+  Assignment data is shared without prop drilling.
+*/
+
+export default function AssignmentsPage() {
   return (
     <main>
       <h1>Assignments</h1>
@@ -20,14 +19,9 @@ function AssignmentsPage({
         Manage your assignments and keep track of upcoming work.
       </p>
 
-      <AssignmentForm setAssignments={setAssignments} />
+      <AssignmentForm />
 
-      <AssignmentList
-        assignments={assignments}
-        setAssignments={setAssignments}
-      />
+      <AssignmentList />
     </main>
   );
 }
-
-export default AssignmentsPage;

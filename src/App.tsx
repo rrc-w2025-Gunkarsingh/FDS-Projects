@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+
 import "./App.css";
 
 import HomePage from "./pages/HomePage";
@@ -9,8 +10,6 @@ import AssignmentsPage from "./pages/AssignmentsPage";
 import GoalsPage from "./pages/GoalsPage";
 import Layout from "./components/layout/Layout";
 
-import type { Assignment } from "./types/assignment";
-
 type Course = {
   id: number;
   code: string;
@@ -18,25 +17,6 @@ type Course = {
 };
 
 function App() {
-  // Keep assignment state for the existing HomePage.
-  const [assignments, setAssignments] = useState<Assignment[]>([
-    {
-      id: 1,
-      title: "Backend API Project",
-      course: "COMP-3018",
-      dueDate: "2026-09-30",
-      completed: false,
-    },
-    {
-      id: 2,
-      title: "React Sprint 2",
-      course: "COMP-3019",
-      dueDate: "2026-10-02",
-      completed: false,
-    },
-  ]);
-
-  // Keep existing course state.
   const [courses, setCourses] = useState<Course[]>([
     {
       id: 1,
@@ -60,22 +40,14 @@ function App() {
     },
   ]);
 
-  
   return (
     <Routes>
       <Route element={<Layout />}>
-        {/* Home page */}
         <Route
           path="/"
-          element={
-            <HomePage
-              assignments={assignments}
-              setAssignments={setAssignments}
-            />
-          }
+          element={<HomePage />}
         />
 
-        {/* Courses page */}
         <Route
           path="/courses"
           element={
@@ -86,18 +58,11 @@ function App() {
           }
         />
 
-        {/* Assignments page */}
         <Route
           path="/assignments"
-          element={
-            <AssignmentsPage
-              assignments={assignments}
-              setAssignments={setAssignments}
-            />
-          }
+          element={<AssignmentsPage />}
         />
 
-        {/* Study Goals page */}
         <Route
           path="/goals"
           element={<GoalsPage />}
@@ -106,4 +71,5 @@ function App() {
     </Routes>
   );
 }
+
 export default App;

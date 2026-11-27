@@ -1,43 +1,56 @@
-import type { Dispatch, SetStateAction } from "react";
 import StudyOverview from "../components/study-overview/StudyOverview";
-import type { Assignment } from "../types/assignment";
 
-type HomePageProps = {
-  assignments: Assignment[];
-  setAssignments: Dispatch<SetStateAction<Assignment[]>>;
-};
+import { useAssignments } from "../hooks/useAssignments";
 
-function HomePage({ assignments }: HomePageProps) {
+/*
+  HomePage uses the same custom assignment hook.
+
+  This allows assignment data to be shared
+  between the Home and Assignments pages.
+*/
+
+export default function HomePage() {
+  const { assignments } = useAssignments();
+
+  const completedAssignments = assignments.filter(
+    (assignment) => assignment.completed
+  );
+
   return (
     <main>
       <StudyOverview />
 
       <section>
-  <h2>Assignment Summary</h2>
+        <h2>Assignment Summary</h2>
 
-  <p>Total assignments: {assignments.length}</p>
+        <p>Total Assignments: {assignments.length}</p>
 
-  {assignments.map((assignment) => (
-    <article key={assignment.id}>
-      <h3>{assignment.title}</h3>
+        <p>
+          Completed Assignments: {completedAssignments.length}
+        </p>
 
-      <p>
-        <strong>Course:</strong> {assignment.course}
-      </p>
+        <p>
+          Remaining Assignments:{" "}
+          {assignments.length - completedAssignments.length}
+        </p>
 
-      <p>
-        <strong>Due:</strong> {assignment.dueDate}
-      </p>
+        {assignments.map((assignment) => (
+          <article key={assignment.id}>
+            <h3>{assignment.title}</h3>
 
-      <p>
-        <strong>Status:</strong>{" "}
-        {assignment.completed ? "Completed" : "Not Completed"}
-      </p>
-    </article>
-  ))}
-</section>
+            <p>Course: {assignment.course}</p>
+
+            <p>Due: {assignment.dueDate}</p>
+
+            <p>
+              Status:{" "}
+              {assignment.completed
+                ? "Completed"
+                : "Not Completed"}
+            </p>
+          </article>
+        ))}
+      </section>
     </main>
   );
 }
-
-export default HomePage;

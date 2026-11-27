@@ -1,17 +1,9 @@
 
-
 import { useState } from "react";
 import type { FormEvent } from "react";
+
 import { useGoals } from "../hooks/useGoals";
-
-/*
-  Sprint 3 - Study Goals
-
-  This component handles the user interface.
-  The useGoals hook provides the goal data and actions.
-  The service handles validation and business rules.
-  The repository manages CRUD operations.
-*/
+import { useAssignments } from "../hooks/useAssignments";
 
 export default function GoalsPage() {
   const {
@@ -21,6 +13,8 @@ export default function GoalsPage() {
     removeGoal,
     toggleComplete,
   } = useGoals();
+
+  const { assignments } = useAssignments();
 
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
@@ -94,6 +88,10 @@ export default function GoalsPage() {
     (goal) => goal.completed
   ).length;
 
+  const completedAssignments = assignments.filter(
+    (assignment) => assignment.completed
+  ).length;
+
   return (
     <main>
       <h1>Study Goals</h1>
@@ -104,6 +102,16 @@ export default function GoalsPage() {
         <p>Total Goals: {goals.length}</p>
         <p>Completed: {completedCount}</p>
         <p>Remaining: {goals.length - completedCount}</p>
+      </section>
+
+      <section>
+        <h2>Assignment Progress</h2>
+        <p>Total Assignments: {assignments.length}</p>
+        <p>Completed Assignments: {completedAssignments}</p>
+        <p>
+          Remaining Assignments:{" "}
+          {assignments.length - completedAssignments}
+        </p>
       </section>
 
       <section>
@@ -141,7 +149,11 @@ export default function GoalsPage() {
         </form>
       </section>
 
-      {error && <p role="alert" style={{ color: "red" }}>{error}</p>}
+      {error && (
+        <p role="alert" style={{ color: "red" }}>
+          {error}
+        </p>
+      )}
 
       <section>
         <h2>My Study Goals</h2>
@@ -195,13 +207,18 @@ export default function GoalsPage() {
                 </label>
 
                 <p>
-                  Status: {goal.completed ? "Completed" : "Not Completed"}
+                  Status:{" "}
+                  {goal.completed ? "Completed" : "Not Completed"}
                 </p>
 
                 <button
                   type="button"
                   onClick={() =>
-                    handleEdit(goal.id, goal.category, goal.title)
+                    handleEdit(
+                      goal.id,
+                      goal.category,
+                      goal.title
+                    )
                   }
                 >
                   Edit
