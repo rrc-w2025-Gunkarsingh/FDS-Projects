@@ -1,29 +1,29 @@
 
-import { useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useState,
+  useSyncExternalStore,
+} from "react";
+
 import { goalService } from "../services/goalService";
 
-/*
-  Custom React hook for the Study Goals feature.
-
-  Returns:
-  goals - List of all study goals
-  addGoal - Adds a new goal
-  updateGoal - Edits an existing goal
-  removeGoal - Deletes a goal
-  toggleComplete - Marks a goal complete or incomplete
-
-  The hook connects React components to the service.
-  Business logic stays in goalService.ts.
-*/
-
 export function useGoals() {
+  const [loadError, setLoadError] = useState("");
+
   const goals = useSyncExternalStore(
     goalService.subscribe,
     goalService.getGoals
   );
 
+  useEffect(() => {
+    goalService.loadGoals().catch((error) => {
+      setLoadError(error.message);
+    });
+  }, []);
+
   return {
     goals,
+    loadError,
     addGoal: goalService.addGoal,
     updateGoal: goalService.updateGoal,
     removeGoal: goalService.removeGoal,

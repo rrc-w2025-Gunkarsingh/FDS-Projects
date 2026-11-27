@@ -8,6 +8,7 @@ import { useAssignments } from "../hooks/useAssignments";
 export default function GoalsPage() {
   const {
     goals,
+    loadError,
     addGoal,
     updateGoal,
     removeGoal,
@@ -20,21 +21,27 @@ export default function GoalsPage() {
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
 
-  const [editingId, setEditingId] = useState<number | null>(null);
+  const [editingId, setEditingId] =
+    useState<number | null>(null);
+
   const [editCategory, setEditCategory] = useState("");
   const [editTitle, setEditTitle] = useState("");
 
-  function handleAdd(event: FormEvent<HTMLFormElement>) {
+  async function handleAdd(
+    event: FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault();
 
     try {
-      addGoal(category, title);
+      await addGoal(category, title);
       setCategory("");
       setTitle("");
       setError("");
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Unable to add goal"
+        err instanceof Error
+          ? err.message
+          : "Unable to add goal"
       );
     }
   }
@@ -50,36 +57,42 @@ export default function GoalsPage() {
     setError("");
   }
 
-  function handleSave(id: number) {
+  async function handleSave(id: number) {
     try {
-      updateGoal(id, editCategory, editTitle);
+      await updateGoal(id, editCategory, editTitle);
       setEditingId(null);
       setError("");
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Unable to update goal"
+        err instanceof Error
+          ? err.message
+          : "Unable to update goal"
       );
     }
   }
 
-  function handleDelete(id: number) {
+  async function handleDelete(id: number) {
     try {
-      removeGoal(id);
+      await removeGoal(id);
       setError("");
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Unable to delete goal"
+        err instanceof Error
+          ? err.message
+          : "Unable to delete goal"
       );
     }
   }
 
-  function handleComplete(id: number) {
+  async function handleComplete(id: number) {
     try {
-      toggleComplete(id);
+      await toggleComplete(id);
       setError("");
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Unable to change status"
+        err instanceof Error
+          ? err.message
+          : "Unable to change status"
       );
     }
   }
@@ -95,19 +108,32 @@ export default function GoalsPage() {
   return (
     <main>
       <h1>Study Goals</h1>
-      <p>Manage your study goals and track your progress.</p>
+
+      <p>
+        Manage your study goals and track your progress.
+      </p>
 
       <section>
         <h2>Goal Progress</h2>
+
         <p>Total Goals: {goals.length}</p>
+
         <p>Completed: {completedCount}</p>
-        <p>Remaining: {goals.length - completedCount}</p>
+
+        <p>
+          Remaining: {goals.length - completedCount}
+        </p>
       </section>
 
       <section>
         <h2>Assignment Progress</h2>
+
         <p>Total Assignments: {assignments.length}</p>
-        <p>Completed Assignments: {completedAssignments}</p>
+
+        <p>
+          Completed Assignments: {completedAssignments}
+        </p>
+
         <p>
           Remaining Assignments:{" "}
           {assignments.length - completedAssignments}
@@ -120,27 +146,48 @@ export default function GoalsPage() {
         <form onSubmit={handleAdd} noValidate>
           <div>
             <label htmlFor="category">Category</label>
+
             <select
               id="category"
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={(e) =>
+                setCategory(e.target.value)
+              }
             >
               <option value="">Select Category</option>
-              <option value="Daily Study">Daily Study</option>
-              <option value="Weekly Goal">Weekly Goal</option>
-              <option value="Programming">Programming</option>
-              <option value="Exam Preparation">Exam Preparation</option>
-              <option value="Project">Project</option>
+
+              <option value="Daily Study">
+                Daily Study
+              </option>
+
+              <option value="Weekly Goal">
+                Weekly Goal
+              </option>
+
+              <option value="Programming">
+                Programming
+              </option>
+
+              <option value="Exam Preparation">
+                Exam Preparation
+              </option>
+
+              <option value="Project">
+                Project
+              </option>
             </select>
           </div>
 
           <div>
             <label htmlFor="title">Goal Title</label>
+
             <input
               id="title"
               type="text"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) =>
+                setTitle(e.target.value)
+              }
               placeholder="Enter study goal"
             />
           </div>
@@ -148,6 +195,12 @@ export default function GoalsPage() {
           <button type="submit">Add Goal</button>
         </form>
       </section>
+
+      {loadError && (
+        <p role="alert" style={{ color: "red" }}>
+          {loadError}
+        </p>
+      )}
 
       {error && (
         <p role="alert" style={{ color: "red" }}>
@@ -158,7 +211,9 @@ export default function GoalsPage() {
       <section>
         <h2>My Study Goals</h2>
 
-        {goals.length === 0 && <p>No goals available.</p>}
+        {goals.length === 0 && (
+          <p>No goals available.</p>
+        )}
 
         {goals.map((goal) => (
           <article key={goal.id}>
@@ -169,13 +224,17 @@ export default function GoalsPage() {
                 <input
                   aria-label="Edit category"
                   value={editCategory}
-                  onChange={(e) => setEditCategory(e.target.value)}
+                  onChange={(e) =>
+                    setEditCategory(e.target.value)
+                  }
                 />
 
                 <input
                   aria-label="Edit title"
                   value={editTitle}
-                  onChange={(e) => setEditTitle(e.target.value)}
+                  onChange={(e) =>
+                    setEditTitle(e.target.value)
+                  }
                 />
 
                 <button
@@ -195,20 +254,25 @@ export default function GoalsPage() {
             ) : (
               <div>
                 <h3>{goal.title}</h3>
+
                 <p>Category: {goal.category}</p>
 
                 <label>
                   <input
                     type="checkbox"
                     checked={goal.completed}
-                    onChange={() => handleComplete(goal.id)}
+                    onChange={() =>
+                      handleComplete(goal.id)
+                    }
                   />
                   Completed
                 </label>
 
                 <p>
                   Status:{" "}
-                  {goal.completed ? "Completed" : "Not Completed"}
+                  {goal.completed
+                    ? "Completed"
+                    : "Not Completed"}
                 </p>
 
                 <button
@@ -226,7 +290,9 @@ export default function GoalsPage() {
 
                 <button
                   type="button"
-                  onClick={() => handleDelete(goal.id)}
+                  onClick={() =>
+                    handleDelete(goal.id)
+                  }
                 >
                   Delete
                 </button>

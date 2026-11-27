@@ -1,85 +1,91 @@
 
 import type { Goal } from "../types/goal";
-import { sampleGoals } from "../data/goals";
 
-// Store a copy of the sample goals in memory.
-let goals: Goal[] = sampleGoals.map((goal) => ({ ...goal }));
+const API_URL = "http://localhost:5000/api/goals";
 
-// Generate unique IDs for new goals.
-let nextId = Math.max(0, ...goals.map((goal) => goal.id)) + 1;
+let goals: Goal[] = [];
 
-// Notify React components when goal data changes.
 const listeners = new Set<() => void>();
 
-// Keep a stable snapshot for React's useSyncExternalStore.
-let snapshot: Goal[] = [...goals];
-
 function notifyListeners() {
-  snapshot = goals.map((goal) => ({ ...goal }));
-
   listeners.forEach((listener) => listener());
 }
 
+async function request<T>(
+  url: string,
+  options?: RequestInit
+): Promise<T> {
+  const response = await fetch(url, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      ...options?.headers,
+    },
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || "Goal API request failed");
+  }
+
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
+  return response.json();
+}
+
 export const goalRepository = {
-  // READ: Get all goals.
   getAll(): Goal[] {
-    return snapshot;
+    return goals;
   },
 
-  // READ: Find one goal by ID.
   getById(id: number): Goal | undefined {
     return goals.find((goal) => goal.id === id);
   },
 
-  // CREATE: Add a new goal.
-  create(data: Omit<Goal, "id">): Goal {
-    const newGoal: Goal = {
-      ...data,
-      id: nextId++,
-    };
-
-    goals = [...goals, newGoal];
-
+  async load() {
+    goals = await request<Goal[]>(API_URL);
     notifyListeners();
-
-    return newGoal;
   },
 
-  // UPDATE: Change an existing goal.
-  update(
+  async create(data: Omit<Goal, "id">) {
+    const goal = await request<Goal>(API_URL, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+
+    goals = [...goals, goal];
+    notifyListeners();
+    return goal;
+  },
+
+  async update(
     id: number,
     changes: Partial<Omit<Goal, "id">>
-  ): Goal | undefined {
-    const existingGoal = goals.find(
-      (goal) => goal.id === id
-    );
+  ) {
+    const goal = await request<Goal>(`${API_URL}/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(changes),
+    });
 
-    if (!existingGoal) {
-      return undefined;
-    }
-
-    const updatedGoal: Goal = {
-      ...existingGoal,
-      ...changes,
-    };
-
-    goals = goals.map((goal) =>
-      goal.id === id ? updatedGoal : goal
+    goals = goals.map((item) =>
+      item.id === id ? goal : item
     );
 
     notifyListeners();
-
-    return updatedGoal;
+    return goal;
   },
 
-  // DELETE: Remove a goal.
-  remove(id: number): void {
+  async remove(id: number) {
+    await request<void>(`${API_URL}/${id}`, {
+      method: "DELETE",
+    });
+
     goals = goals.filter((goal) => goal.id !== id);
-
     notifyListeners();
   },
 
-  // Subscribe to goal changes.
   subscribe(listener: () => void) {
     listeners.add(listener);
 
