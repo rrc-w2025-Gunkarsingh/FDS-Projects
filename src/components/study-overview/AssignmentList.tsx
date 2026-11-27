@@ -1,21 +1,18 @@
-﻿function AssignmentList() {
-  const assignments = [
-    {
-      name: "Back-End API Project",
-      course: "COMP-3018",
-      dueDate: "September 25",
-    },
-    {
-      name: "Cloud Infrastructure Lab",
-      course: "COMP-3020",
-      dueDate: "September 27",
-    },
-    {
-      name: "Secure Coding Assignment",
-      course: "COMP-3021",
-      dueDate: "September 30",
-    },
-  ];
+﻿import { useAssignments } from "../../hooks/useAssignments";
+
+/*
+  This component uses the shared assignment hook.
+
+  It displays assignments from the repository
+  instead of using a separate hardcoded list.
+*/
+
+export default function AssignmentList() {
+  const { assignments } = useAssignments();
+
+  const upcomingAssignments = assignments.filter(
+    (assignment) => !assignment.completed
+  );
 
   return (
     <article className="study-card">
@@ -24,16 +21,20 @@
       <div className="study-card__section">
         <h4>Upcoming Assignments</h4>
 
-        {assignments.map((assignment) => (
-          <div key={assignment.name}>
-            <p>{assignment.name}</p>
-            <p>{assignment.course}</p>
-            <p>Due: {assignment.dueDate}</p>
-          </div>
-        ))}
+        {upcomingAssignments.length === 0 ? (
+          <p>No upcoming assignments.</p>
+        ) : (
+          upcomingAssignments.map((assignment) => (
+            <div key={assignment.id}>
+              <p>{assignment.title}</p>
+
+              <p>{assignment.course}</p>
+
+              <p>Due: {assignment.dueDate}</p>
+            </div>
+          ))
+        )}
       </div>
     </article>
   );
 }
-
-export default AssignmentList;

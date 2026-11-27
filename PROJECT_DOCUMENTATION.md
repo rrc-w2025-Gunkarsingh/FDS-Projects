@@ -1,30 +1,28 @@
-# Project Documentation
+## Project Documentation
+Project Overview
 
-## Project Overview
+The Study Planner is a React-based web application designed to help students organize and manage their academic work. The project allows users to view different sections of their study information, manage assignments, and interact with dynamic components. In Sprint 2, the team focused on multi-page navigation, shared state, reusable components, forms, and dynamic assignment management.
 
-[Provide a brief summary of the project, including the theme and objectives.]
+## Team Members
+Gunkar Singh
+Sania
+Bhumika
+Member Contributions
+Gunkar Singh
 
-## Team Members:
-
-- Andrei Anoling
-- Name 2
-- Name 3
-- Lichao Huang
-
-## Member Contributions:
-
-### Name 1:
-
-- Worked on the header
-
-### Name 2:
-
-- Was responsible for [specific tasks], focusing on [specific HTML elements].
-
-### Name 3:
-
-- Handled [specific sections], covering [specific topics or features].
-
-### Lichao Huang
-
-- Create a menu for the website, including Appetizer, Main Courses, and Beverages, with two dishes in each section. Use CSS to make the menu more aesthetically pleasing, incorporating pseudo-elements and pseudo-classes to add interactivity and enhance the styling.
+# Worked on the Assignments feature for Sprint 2.
+Created the Assignment Form for entering assignment name, course, and due date.
+Created the Assignment List to display assignments dynamically.
+Created reusable Assignment Card components.
+Implemented functionality to add, remove, and mark assignments as completed.
+Worked with shared state using React useState and passed state through props.
+# Sania
+Worked on the application navigation and page structure.
+Helped implement the multi-page structure using React Router.
+Worked on navigation between the Home, Courses, Assignments, and Goals pages.
+Helped create the consistent Layout and navigation interface across the application.
+#Bhumika
+Worked on the shared application structure and page integration.
+Helped connect the different feature pages with the main application.
+Worked with reusable components and ensured the pages could access the required shared information.
+Helped test the application and verify that navigation and page interactions worked correctly.
