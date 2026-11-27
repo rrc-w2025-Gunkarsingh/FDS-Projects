@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import courseRoutes from "./routes/courseRoutes.js";
+import assignmentRoutes from "./routes/assignmentRoutes";
 
 const app = express();
 const PORT = 5000;
@@ -24,6 +25,8 @@ app.get("/api/health", (_req, res) => {
 
 // Course API routes
 app.use("/api/courses", courseRoutes);
+app.use("/api/assignments", assignmentRoutes);
+
 
 // Start backend server
 app.listen(PORT, () => {
