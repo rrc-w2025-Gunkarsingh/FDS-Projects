@@ -1,7 +1,7 @@
+
 import type { RequestHandler } from "express";
 import type { ZodType } from "zod";
 
-// Check the request body or URL parameters
 export const validate = (
   schema: ZodType,
   source: "body" | "params" = "body"
@@ -16,6 +16,11 @@ export const validate = (
       });
       return;
     }
+
+    res.locals.validated = {
+      ...res.locals.validated,
+      [source]: result.data,
+    };
 
     next();
   };

@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -11,4 +12,11 @@ model Course {
   id   Int    @id @default(autoincrement())
   code String @unique
   name String
+}
+
+model Goal {
+  id        Int     @id @default(autoincrement())
+  category  String
+  title     String
+  completed Boolean @default(false)
 }
