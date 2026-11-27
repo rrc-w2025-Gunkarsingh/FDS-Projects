@@ -1,37 +1,22 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import StudyOverview from "./components/study-overview/StudyOverview";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+
+import HomePage from "./pages/HomePage";
 import CoursesPage from "./pages/CoursesPage";
 import AssignmentsPage from "./pages/AssignmentsPage";
-import "./App.css";
+import GoalsPage from "./pages/GoalsPage";
+import Layout from "./components/layout/Layout";
 
 function App() {
   return (
-    <BrowserRouter>
-      <header className="app-header">
-        <h1>Study Planner</h1>
-        <p>Organize your studies. Stay on track. Reach your goals.</p>
-      </header>
-
-      <nav>
-        <Link to="/">Home</Link>
-        {" | "}
-        <Link to="/courses">Courses</Link>
-        <Link to="/assignments">Assignments</Link>
-      </nav>
-
-      <main className="app-main">
-        <Routes>
-          <Route path="/" element={<StudyOverview />} />
-          <Route path="/courses" element={<CoursesPage />} />
-          <Route path="/assignments" element={<AssignmentsPage />} />
-        </Routes>
-      </main>
-
-      <footer className="app-footer">
-        <p>Study Planner Team</p>
-        <p>Team Members - Gunkar, Sania, Bhumika</p>
-      </footer>
-    </BrowserRouter>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/courses" element={<CoursesPage />} />
+        <Route path="/assignments" element={<AssignmentsPage />} />
+        <Route path="/goals" element={<GoalsPage />} />
+      </Route>
+    </Routes>
   );
 }
 
