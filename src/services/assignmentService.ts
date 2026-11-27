@@ -1,87 +1,63 @@
+import type { Assignment } from "../types/assignment";
 import { assignmentRepository } from "../repositories/assignmentRepository";
 
 export const assignmentService = {
-  getAssignments() {
-    return assignmentRepository.getAll();
+  // Get all assignments
+  getAllAssignments: async (): Promise<Assignment[]> => {
+    return await assignmentRepository.getAllAssignments();
   },
 
-  subscribe(listener: () => void) {
-    return assignmentRepository.subscribe(listener);
+  // Get one assignment
+  getAssignmentById: async (id: number): Promise<Assignment> => {
+    return await assignmentRepository.getAssignmentById(id);
   },
 
-  addAssignment(
+  // Add an assignment
+  addAssignment: async (
     title: string,
     course: string,
     dueDate: string
-  ) {
-    if (!title.trim()) {
-      throw new Error("Assignment title is required");
+  ): Promise<Assignment> => {
+    if (!title.trim() || !course.trim() || !dueDate) {
+      throw new Error("All assignment fields are required");
     }
 
-    if (!course.trim()) {
-      throw new Error("Please select a course");
-    }
-
-    if (!dueDate) {
-      throw new Error("Due date is required");
-    }
-
-    if (
-      !/^\d{4}-\d{2}-\d{2}$/.test(dueDate) ||
-      Number.isNaN(Date.parse(dueDate))
-    ) {
-      throw new Error("Please enter a valid due date");
-    }
-
-    return assignmentRepository.create({
+    return await assignmentRepository.addAssignment({
       title: title.trim(),
       course: course.trim(),
-      dueDate,
+      dueDate: new Date(`${dueDate}T12:00:00`).toISOString(),
       completed: false,
     });
   },
 
-  removeAssignment(id: number) {
-    assignmentRepository.remove(id);
-  },
-
-  toggleComplete(id: number) {
-    const assignment = assignmentRepository.getById(id);
-
-    if (!assignment) {
-      throw new Error("Assignment not found");
-    }
-
-    return assignmentRepository.update(id, {
-      completed: !assignment.completed,
-    });
-  },
-
-  updateAssignment(
+  // Update an assignment
+  updateAssignment: async (
     id: number,
-    title: string,
-    course: string,
-    dueDate: string
-  ) {
-    if (!title.trim()) {
-      throw new Error("Assignment title is required");
+    changes: Partial<Omit<Assignment, "id">>
+  ): Promise<Assignment> => {
+    if (changes.title !== undefined && !changes.title.trim()) {
+      throw new Error("Assignment title cannot be empty");
     }
 
-    if (!course.trim()) {
-      throw new Error("Course is required");
+    if (changes.course !== undefined && !changes.course.trim()) {
+      throw new Error("Course cannot be empty");
     }
 
-    if (
-      !/^\d{4}-\d{2}-\d{2}$/.test(dueDate) ||
-      Number.isNaN(Date.parse(dueDate))
-    ) {
-      throw new Error("Valid due date is required");
-    }
+    return await assignmentRepository.updateAssignment(id, changes);
+  },
 
-    return assignmentRepository.update(id, {
-      title: title.trim(),
-      course: course.trim(),
-      dueDate,
+  // Mark an assignment complete or incomplete
+  toggleAssignment: async (
+    id: number,
+    completed: boolean
+  ): Promise<Assignment> => {
+    return await assignmentRepository.updateAssignment(id, {
+      completed,
     });
+  },
+
+  // Delete an assignment
+  deleteAssignment: async (id: number): Promise<void> => {
+    await assignmentRepository.deleteAssignment(id);
   },
 };

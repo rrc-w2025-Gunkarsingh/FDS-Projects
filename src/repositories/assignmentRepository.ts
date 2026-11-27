@@ -1,86 +1,69 @@
 import type { Assignment } from "../types/assignment";
-import { sampleAssignments } from "../data/assignments";
 
-let assignments: Assignment[] = sampleAssignments.map(
-  (assignment) => ({ ...assignment })
-);
+const API_URL = "http://localhost:5000/api/assignments";
 
-let nextId =
-  Math.max(...assignments.map((assignment) => assignment.id), 0) + 1;
-
-const listeners = new Set<() => void>();
-
-let snapshot: Assignment[] = [...assignments];
-
-function notify() {
-  snapshot = assignments.map((assignment) => ({ ...assignment }));
-
-  listeners.forEach((listener) => listener());
+async function handleResponse(response: Response) {
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || "Assignment request failed");
+  }
 }
 
+// Repository handles communication with the backend API
 export const assignmentRepository = {
-  getAll(): Assignment[] {
-    return snapshot;
+  // Get all assignments
+  getAllAssignments: async (): Promise<Assignment[]> => {
+    const response = await fetch(API_URL);
+    await handleResponse(response);
+    return response.json();
   },
 
-  getById(id: number): Assignment | undefined {
-    return assignments.find(
-      (assignment) => assignment.id === id
-    );
+  // Get one assignment
+  getAssignmentById: async (id: number): Promise<Assignment> => {
+    const response = await fetch(`${API_URL}/${id}`);
+    await handleResponse(response);
+    return response.json();
   },
 
-  create(data: Omit<Assignment, "id">): Assignment {
-    const newAssignment: Assignment = {
-      ...data,
-      id: nextId++,
-    };
+  // Add an assignment
+  addAssignment: async (
+    assignment: Omit<Assignment, "id">
+  ): Promise<Assignment> => {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(assignment),
+    });
 
-    assignments = [...assignments, newAssignment];
-
-    notify();
-
-    return newAssignment;
+    await handleResponse(response);
+    return response.json();
   },
 
-  update(
+  // Update an assignment
+  updateAssignment: async (
     id: number,
     changes: Partial<Omit<Assignment, "id">>
-  ): Assignment | undefined {
-    const existing = assignments.find(
-      (assignment) => assignment.id === id
-    );
+  ): Promise<Assignment> => {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(changes),
+    });
 
-    if (!existing) {
-      return undefined;
-    }
-
-    const updated = {
-      ...existing,
-      ...changes,
-    };
-
-    assignments = assignments.map((assignment) =>
-      assignment.id === id ? updated : assignment
-    );
-
-    notify();
-
-    return updated;
+    await handleResponse(response);
+    return response.json();
   },
 
-  remove(id: number): void {
-    assignments = assignments.filter(
-      (assignment) => assignment.id !== id
-    );
+  // Delete an assignment
+  deleteAssignment: async (id: number): Promise<void> => {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+    });
 
-    notify();
-  },
-
-  subscribe(listener: () => void) {
-    listeners.add(listener);
-
-    return () => {
-      listeners.delete(listener);
-    };
+    await handleResponse(response);
   },
 };
